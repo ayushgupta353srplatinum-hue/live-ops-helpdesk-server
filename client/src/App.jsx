@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/tickets")
+    fetch("https://live-ops-helpdesk-server.onrender.com/tickets")
       .then((res) => res.json())
       .then((data) => setTickets(data))
 
