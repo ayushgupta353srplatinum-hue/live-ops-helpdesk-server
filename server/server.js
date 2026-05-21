@@ -14,10 +14,8 @@ app.use(express.json())
 // Routes
 app.use("/tickets", ticketRoutes)
 
-// Create HTTP Server
 const server = http.createServer(app)
 
-// Socket.io Setup
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -25,22 +23,16 @@ const io = new Server(server, {
   }
 })
 
-// In-memory Lock Storage
 const lockedTickets = new Map()
 
-// Test Route
 app.get("/", (req, res) => {
   res.send("Helpdesk Server Running")
 })
 
-// Socket Connection
 io.on("connection", (socket) => {
 
   console.log("User Connected:", socket.id)
 
-  // =========================
-  // LOCK TICKET
-  // =========================
   socket.on("lock_ticket", ({ ticketId, agentName }) => {
 
     // Check if already locked
@@ -53,7 +45,6 @@ io.on("connection", (socket) => {
       return
     }
 
-    // Lock Ticket
     lockedTickets.set(ticketId, {
       socketId: socket.id,
       agentName
@@ -68,9 +59,6 @@ io.on("connection", (socket) => {
     console.log(`Ticket ${ticketId} locked by ${agentName}`)
   })
 
-  // =========================
-  // UNLOCK TICKET
-  // =========================
   socket.on("unlock_ticket", ({ ticketId }) => {
 
     lockedTickets.delete(ticketId)
@@ -82,9 +70,6 @@ io.on("connection", (socket) => {
     console.log(`Ticket ${ticketId} unlocked`)
   })
 
-  // =========================
-  // DISCONNECT HANDLER
-  // =========================
   socket.on("disconnect", () => {
 
     console.log("User Disconnected:", socket.id)

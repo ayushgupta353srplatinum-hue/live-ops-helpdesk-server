@@ -11,9 +11,6 @@ function App() {
   const [isDisconnected, setIsDisconnected] = useState(false)
   const [agentName, setAgentName] = useState("")
 
-  // =========================
-  // FETCH TICKETS
-  // =========================
   useEffect(() => {
 
     fetch("http://localhost:5000/tickets")
@@ -22,9 +19,6 @@ function App() {
 
   }, [])
 
-  // =========================
-  // SOCKET EVENTS
-  // =========================
   useEffect(() => {
 
     // Ticket Locked
@@ -67,9 +61,6 @@ function App() {
 
   }, [])
 
-  // =========================
-  // LOCK FUNCTION
-  // =========================
   const handleLock = (ticketId) => {
 
     if (!agentName) {
@@ -83,9 +74,6 @@ function App() {
     })
   }
 
-  // =========================
-  // UNLOCK FUNCTION
-  // =========================
   const handleUnlock = (ticketId) => {
 
     socket.emit("unlock_ticket", {
@@ -173,7 +161,7 @@ function App() {
                 {
                   isLocked && (
                     <div className="lock-info">
-                      🔒 Locked by {lockedBy}
+                       Locked by {lockedBy}
                     </div>
                   )
                 }
