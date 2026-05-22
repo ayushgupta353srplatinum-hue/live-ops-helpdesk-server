@@ -212,7 +212,6 @@ socket.on("disconnect", () => {
 ## Frontend
 
 https://live-ops-helpdesk-server.vercel.app/
-
 ## Backend
 
 https://live-ops-helpdesk-server.onrender.com
