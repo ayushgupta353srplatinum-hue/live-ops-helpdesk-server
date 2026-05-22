@@ -211,11 +211,11 @@ socket.on("disconnect", () => {
 
 ## Frontend
 
-[Add your Vercel URL here](https://live-ops-helpdesk-server.vercel.app/)
+https://live-ops-helpdesk-server.vercel.app/
 
 ## Backend
 
-[https://live-ops-helpdesk-server.onrender.com](https://live-ops-helpdesk-server.onrender.com)
+https://live-ops-helpdesk-server.onrender.com
 
 ---
 
