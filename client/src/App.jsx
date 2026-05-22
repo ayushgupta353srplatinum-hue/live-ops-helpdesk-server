@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import { io } from "socket.io-client"
 import "./App.css"
-
-const socket = io("http://localhost:5000")
+const socket = io("https://live-ops-helpdesk-server.onrender.com")
 
 function App() {
 
@@ -11,20 +10,14 @@ function App() {
   const [isDisconnected, setIsDisconnected] = useState(false)
   const [agentName, setAgentName] = useState("")
 
-  // =========================
-  // FETCH TICKETS
-  // =========================
   useEffect(() => {
 
-    fetch("http://localhost:5000/tickets")
+    fetch("https://live-ops-helpdesk-server.onrender.com/tickets")
       .then((res) => res.json())
       .then((data) => setTickets(data))
 
   }, [])
 
-  // =========================
-  // SOCKET EVENTS
-  // =========================
   useEffect(() => {
 
     // Ticket Locked
@@ -67,9 +60,6 @@ function App() {
 
   }, [])
 
-  // =========================
-  // LOCK FUNCTION
-  // =========================
   const handleLock = (ticketId) => {
 
     if (!agentName) {
@@ -83,9 +73,6 @@ function App() {
     })
   }
 
-  // =========================
-  // UNLOCK FUNCTION
-  // =========================
   const handleUnlock = (ticketId) => {
 
     socket.emit("unlock_ticket", {
@@ -173,7 +160,7 @@ function App() {
                 {
                   isLocked && (
                     <div className="lock-info">
-                      🔒 Locked by {lockedBy}
+                        🔒 Locked by {lockedBy}
                     </div>
                   )
                 }
